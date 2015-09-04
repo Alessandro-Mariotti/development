@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+	<head>
+		<title>TimelineLocator</title>
+		<script src="../jquery-2.1.4.min.js"></script>
+		<script src="../lodash.js"></script>
+	</head>
+	<body style="padding-top: 30px; overflow: auto;">
+		
+		<div id="buttons" style="position: fixed; top: 0; left: 0; width: 100%; background-color: lime; padding: 3px;">
+			<button id="start">start</button>
+			<button id="stop">stop</button>
+			<button id="pause">pause</button>
+			<label for="seek">Seek:</label>
+			<input type="text" id="seek"/>
+			<button id="go">Go</button>
+			<button id="clear">Clear output</button>
+		</div>
+
+		<div id="table-container">
+			<table id="output">
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+
+		<script src="newApiSample.js"></script>
+		<script src="Timeline.js"></script>
+		<script src="TimelineLocator.js"></script>
+		<script src="main.js"></script>
+
+		<script>
+			$(document).ready(function() {
+
+				$('#start').click(function(e) {
+					tll.start();
+				});
+				$('#stop').click(function(e) {
+					tll.stop();
+				});
+				$('#pause').click(function(e) {
+					tll.pause();
+				})
+				$('#go').click(function(e) {
+					tll.seek($('#seek').val());
+				});
+				$('#clear').click(function(e) {
+					$('#table-container').empty();
+					var $t = $('<table/>', {id: 'output'});
+					$t.appendTo($('#table-container'));
+					$t.append($('<tbody/>'));
+				})
+			});
+		</script>
+
+		<style>
+			#output {
+				font-family: 'inconsolata' sans-serif;
+				font-size: 14px;
+				box-sizing: border-box;
+				border-collapse: collapse;
+			}
+			
+			td {
+				border: 1px solid #c0c0c0;
+			}
+		</style>
+	</body>
+</html>
